@@ -22,7 +22,6 @@ const App = () => {
     newPoints[selected] += 1;
     setPoints(newPoints);
   }
-  console.log({ selected, points })
   return (
     <div>
       <nav style={{ textAlign: 'center' }}>
@@ -30,7 +29,8 @@ const App = () => {
       </nav>
       <main>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '90vw' }}>
-          <div style={{ boxShadow: '0px 0px 10px grey', borderRadius: 10, padding: 10 }}>
+          <div style={{ textAlign: 'center', boxShadow: '0px 0px 10px grey', borderRadius: 10, padding: 10 }}>
+            <h2>Ancedots of the day: </h2>
             <p>"{anecdotes[selected]}",</p>
             <p>has {points[selected]}</p>
           </div>
@@ -38,6 +38,11 @@ const App = () => {
           <div>
             <button onClick={handleVote} >Vote</button>
             {" "}<button onClick={handleClick} >Wisdom 🙏</button>
+          </div>
+          <br />
+          <div style={{ textAlign: 'center', boxShadow: '0px 0px 10px grey', borderRadius: 10, padding: 10 }}>
+            <h2>Ancedots with highest Votes: </h2>
+            {anecdotes[points.indexOf(Math.max(...points))]}
           </div>
         </div>
       </main>
