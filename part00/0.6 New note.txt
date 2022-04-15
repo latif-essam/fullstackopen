@@ -1,9 +1,0 @@
-title SPA New Note Sequence Diagram
-
-note over Browser:
-user entered the note on the text field and submit it to server
-end note
-Browser->Server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
-note over Server:
-new note has been added to array of notes and server returned the new note.
-end note
