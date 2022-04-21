@@ -1,14 +1,14 @@
 import React from 'react';
 
 
-const Contatc = ({ contatc }) => {
+const Contatc = ({ item }) => {
     return (
         <li>
             <p>
-                {contatc.name}
+                {item?.date}
             </p>
             <p>
-                {contatc.phone}
+                {item?.content}
             </p>
             <hr />
         </li>

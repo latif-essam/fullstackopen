@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Contacts from './components/Contacts';
 import NewContact from './components/NewContact';
@@ -6,28 +7,24 @@ import { checkUniqueness, getId } from './utils/helpers';
 
 
 const App = (props) => {
-  const [persons, setPersons] = useState(
-    [
-      { name: 'Dina Samir', phone: '01205175195', id: 0 },
-      { name: 'Arto Hellas', phone: '040-123456', id: 1 },
-      { name: 'Ada Lovelace', phone: '39-44-5323523', id: 2 },
-      { name: 'Dan Abramov', phone: '12-43-234345', id: 3 },
-      { name: 'Mary Poppendieck', phone: '39-23-6423122', id: 4 }
-    ]);
+  const [data, setData] = useState([]);
 
-  const [filteredContacts, setFilteredContacts] = useState(persons);
-
+  const url = 'http://localhost:3001/notes';
+  // axios.post(url, { id: 4, content: 'lol is a string method', important: true, date: Date.now() });
+  // axios.put(url, { id: 4, content: 'pop is another string method that comes with extra features', important: true, date: Date.now() });
+  // const notes = fetch('/',{method:'GET',mode:'no-cors'})
   useEffect(() => {
-    setFilteredContacts(persons)
-  }, [persons]);
 
+    axios.get(url).then(({ data }) => setData(data)).catch(e => console.log({ e }));
+
+
+  }, []);
 
   return (
     <div>
       <h1>Phonebook</h1>
-      <SearchContatcs handleFilteredContacts={setFilteredContacts} list={persons} />
-      <NewContact handleAddContact={setPersons} list={persons} />
-      <Contacts contacts={filteredContacts} />
+      <h2>{data.length}</h2>
+      {data.length > 0 ? <Contacts list={data} /> : 'loading ....'}
     </div>
   )
 }

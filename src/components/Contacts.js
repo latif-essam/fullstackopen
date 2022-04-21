@@ -1,13 +1,14 @@
 import React from 'react';
 import Contatc from './Contact';
 
-const Contacts = ({ contacts }) => {
+const Contacts = ({ list }) => {
+
     return (
         <div>
             <h2>Contatcs:</h2>
             <ul style={{ listStyle: 'none', boxShadow: '0px 0px 1px dodgerblue', padding: 5 }}>
-                {contacts.map(person =>
-                    <Contatc key={person.id} contatc={person} />
+                {list && list.map(item =>
+                    <Contatc key={item.id} item={item} />
                 )}
             </ul>
         </div>
