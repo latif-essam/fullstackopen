@@ -10,14 +10,17 @@ const SearchContatcs = ({ list, handleFilteredContacts }) => {
         handleFilteredContacts(newList);
     }
     return (
-        <p>Search for Contact:
+        <div className='box_shadow'>
+            <h2>
+                Search for Contact:
+            </h2>
             <input type="text"
                 onBlur={() => {
                     setInput('')
                     handleFilteredContacts(list)
                 }}
                 value={input}
-                onChange={handleSearch} /></p>
+                onChange={handleSearch} /></div>
     );
 }
 

@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { checkUniqueness } from '../utils/helpers';
 import { getId } from './../utils/helpers';
+import { baseURL } from './../App';
 
 
 const NewContact = ({ handleAddContact, list }) => {
@@ -12,15 +14,21 @@ const NewContact = ({ handleAddContact, list }) => {
         e.preventDefault();
         if (checkUniqueness(list, contact.name)) return alert(`${contact.name} is already added to phonebook`);
 
-        handleAddContact(list => [...list, {
-            id: getId(),
-            ...contact
-        }]);
+        // save new contact locally to state of app
+
+        const contactObj = { id: getId(), ...contact };
+        handleAddContact(list => [...list, contactObj]);
+
+        // save new contact to the database
+        axios
+            .post(baseURL + "contacts", contactObj)
+            .then(({ data }) => console.log({ data }))
+            .catch((error) => console.log({ error }));
 
         setContact({ name: '', phone: '' });
     }
     return (
-        <div>
+        <div className='box_shadow'>
             <h2>Add new Contatc</h2>
             <form onSubmit={addContact}>
                 <label htmlFor="name">name: </label>
