@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import WeatherInfoC from './WeatherInfoC';
 
 
 const Country = ({ country, handleFilteredList, special = false }) => {
@@ -15,6 +16,7 @@ const Country = ({ country, handleFilteredList, special = false }) => {
                     <h2>{country.name.common}</h2>
                     <p> capital {country.capital}</p>
                     <p> area {country.area}</p>
+                    <h3>Languages:</h3>
                     <ul>
                         {Object.keys(country.languages).map((key) =>
                         (<li key={key}>
@@ -22,6 +24,7 @@ const Country = ({ country, handleFilteredList, special = false }) => {
                         </li>))}
                     </ul>
                     <img width={200} src={country.flags.png} alt={country.name.common} />
+                    <WeatherInfoC country={country} />
                 </div>
             )}
             {!s && (
