@@ -12,18 +12,21 @@ const Country = ({ country, handleFilteredList, special = false }) => {
     return (
         <>
             {s && (
-                <div>
-                    <h2>{country.name.common}</h2>
-                    <p> capital {country.capital}</p>
-                    <p> area {country.area}</p>
-                    <h3>Languages:</h3>
-                    <ul>
-                        {Object.keys(country.languages).map((key) =>
-                        (<li key={key}>
-                            {country.languages[key]}
-                        </li>))}
-                    </ul>
-                    <img width={200} src={country.flags.png} alt={country.name.common} />
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
+                    <div style={{ paddingInline: 10 }}>
+
+                        <h2>{country.name.common}</h2>
+                        <p> capital {country.capital}</p>
+                        <p> area {country.area}</p>
+                        <h3>Languages:</h3>
+                        <ul>
+                            {Object.keys(country.languages).map((key) =>
+                            (<li key={key}>
+                                {country.languages[key]}
+                            </li>))}
+                        </ul>
+                        <img width={200} src={country.flags.png} alt={country.name.common} />
+                    </div>
                     <WeatherInfoC country={country} />
                 </div>
             )}

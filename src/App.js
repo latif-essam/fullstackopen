@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Countries from './components/Countries';
-import NewContact from './components/NewContact';
 import SearchC from './components/SearchC';
 
 import axios from 'axios';
