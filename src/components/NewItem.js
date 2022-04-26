@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { checkUniqueness } from '../utils/helpers';
-import { getId } from './../utils/helpers';
+import { getId } from '../utils/helpers';
 
 
-const NewContact = ({ handleAddContact, list }) => {
+const NewItem = ({ handleAddItem, list }) => {
     const [contact, setContact] = useState({ name: '', phone: '' });
 
 
 
-    const addContact = (e) => {
+    const addItem = (e) => {
         e.preventDefault();
         if (checkUniqueness(list, contact.name)) return alert(`${contact.name} is already added to phonebook`);
 
-        handleAddContact(list => [...list, {
+        handleAddItem(list => [...list, {
             id: getId(),
             ...contact
         }]);
@@ -22,7 +22,7 @@ const NewContact = ({ handleAddContact, list }) => {
     return (
         <div>
             <h2>Add new Contatc</h2>
-            <form onSubmit={addContact}>
+            <form onSubmit={addItem}>
                 <label htmlFor="name">name: </label>
                 <input type="text" id='name' value={contact.name} onChange={({ target }) => setContact(c => ({ ...c, name: target.value }))} />
                 <label htmlFor="phone"> phone: </label>
@@ -33,4 +33,4 @@ const NewContact = ({ handleAddContact, list }) => {
     );
 }
 
-export default NewContact;
+export default NewItem;

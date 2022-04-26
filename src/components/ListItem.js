@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Contatc = ({ item }) => {
+const ListItem = ({ item }) => {
     return (
         <li>
             <p>
@@ -15,4 +15,4 @@ const Contatc = ({ item }) => {
     );
 }
 
-export default Contatc;
+export default ListItem;
