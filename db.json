@@ -10,7 +10,7 @@
       "id": 2,
       "content": "Browser can execute only JavaScript",
       "date": "2022-1-17T18:39:34.091Z",
-      "important": false
+      "important": true
     },
     {
       "id": 3,
@@ -21,8 +21,32 @@
     {
       "id": 4,
       "content": "lol is a string method",
-      "important": true,
+      "important": false,
       "date": 1650553790980
+    },
+    {
+      "id": 153459779862,
+      "content": "QArc",
+      "important": false,
+      "date": "Thu Apr 28 2022 16:32:05 GMT+0200 (Eastern European Standard Time)"
+    },
+    {
+      "id": 1300120160288,
+      "content": "HTML is easy",
+      "important": true,
+      "date": "Thu Apr 28 2022 16:32:56 GMT+0200 (Eastern European Standard Time)"
+    },
+    {
+      "id": 406844094492,
+      "content": "QArc",
+      "important": true,
+      "date": "Thu Apr 28 2022 16:33:08 GMT+0200 (Eastern European Standard Time)"
+    },
+    {
+      "id": 1352560157773,
+      "content": "QArcs",
+      "important": true,
+      "date": "Thu Apr 28 2022 16:38:56 GMT+0200 (Eastern European Standard Time)"
     }
   ],
   "users": []

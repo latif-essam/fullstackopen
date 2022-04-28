@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
+import noteServices from '../services/notes';
 import { checkUniqueness } from '../utils/helpers';
 import { getId } from '../utils/helpers';
 
 
 const NewItem = ({ handleAddItem, list }) => {
-    const [contact, setContact] = useState({ name: '', phone: '' });
-
-
+    const [note, setNote] = useState('');
 
     const addItem = (e) => {
         e.preventDefault();
-        if (checkUniqueness(list, contact.name)) return alert(`${contact.name} is already added to phonebook`);
+        if (checkUniqueness(list, note)) return alert(`${note} is already added to phonebook`);
 
-        handleAddItem(list => [...list, {
+
+        const newNote = {
             id: getId(),
-            ...contact
-        }]);
+            content: note,
+            important: Math.random() < 0.5,
+            date: new Date().toString(),
+        }
+        // handleAddItem(list => [...list, newNote]);
+        noteServices
+            .create(newNote)
+            .then(({ data }) => {
+                handleAddItem(notes => notes.concat(newNote))
+                setNote('');
+            })
+            .catch(error => console.log({ error }));
 
-        setContact({ name: '', phone: '' });
     }
     return (
         <div>
-            <h2>Add new Contatc</h2>
+            <h2>Add new Item</h2>
             <form onSubmit={addItem}>
-                <label htmlFor="name">name: </label>
-                <input type="text" id='name' value={contact.name} onChange={({ target }) => setContact(c => ({ ...c, name: target.value }))} />
-                <label htmlFor="phone"> phone: </label>
-                <input type="number" id='phone' value={contact.phone} onChange={({ target }) => setContact((c => ({ ...c, phone: target.value })))} />
-                {" "}<button type='submit' style={{ paddingBlock: 5, paddingInline: 12, backgroundColor: 'dodgerblue', color: 'white', border: 'none', borderRadius: 10 }}> add </button>
+                <label htmlFor="note">Note :  </label> {" "}
+                <input type="text" id='note' value={note} onChange={({ target }) => setNote(target.value)} />
+
+                {"  "}<button type='submit' style={{ paddingBlock: 5, paddingInline: 12, backgroundColor: 'dodgerblue', color: 'white', border: 'none', borderRadius: 10 }}> add </button>
             </form>
         </div>
     );

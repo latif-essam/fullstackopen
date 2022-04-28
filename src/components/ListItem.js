@@ -1,14 +1,19 @@
 import React from 'react';
 
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, toggleItem }) => {
+    const label = item.important ? 'make not important' : 'make important';
+
     return (
         <li>
             <p>
-                {item?.date}
+                {item?.content}
             </p>
             <p>
-                {item?.content}
+                {item?.important ? '✔' : 'X'}
+            </p>
+            <p>
+                <button onClick={toggleItem} className={`btn btn-${item.important ? 'secondary' : 'success'}`}> {label}</button>
             </p>
             <hr />
         </li>
