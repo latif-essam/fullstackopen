@@ -2,7 +2,7 @@ import React from 'react';
 import contactsService from '../services/contacts';
 
 
-const Contatc = ({ contatc, handleUpdateContacts }) => {
+const Contatc = ({ contatc, handleUpdateContacts, setNotifications }) => {
     const handleDelete = () => {
         const message = `delete ${contatc.name}?`;
         if (window.confirm(message)) {
@@ -11,6 +11,8 @@ const Contatc = ({ contatc, handleUpdateContacts }) => {
                 .then(data => {
                     console.log("success", data);
                     handleUpdateContacts((prevState) => prevState.filter(c => c.id !== contatc.id));
+                    setNotifications({ msg: `Removed ${data.name} successfully.`, color: 'danger' });
+                    setTimeout(() => setNotifications({ msg: null }), 5000)
                 })
                 .catch(error => console.log({ error }));
         }

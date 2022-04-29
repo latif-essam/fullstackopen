@@ -4,7 +4,7 @@ import { getId } from './../utils/helpers';
 import contactsService from '../services/contacts';
 
 
-const NewContact = ({ handleAddContact, list }) => {
+const NewContact = ({ handleAddContact, list, setNotifications }) => {
     const [contact, setContact] = useState({ name: '', phone: '' });
 
 
@@ -25,23 +25,33 @@ const NewContact = ({ handleAddContact, list }) => {
                         handleAddContact((prevState) => prevState.map((c) => c.id === oldContact.id ? updatedContact : c)
                         );
                         setContact({ name: '', phone: '' });
+                        setNotifications({ msg: `Updated ${updatedContact.name}'s number successfully.`, color: 'info' });
+                        setTimeout(() => setNotifications({ msg: null }), 5000)
 
                     })
-                    .catch((error) => console.log({ error }));
+                    .catch((error) => {
+                        console.log({ error });
+                        setNotifications({ msg: `Information of ${contact.name} has already been removed from the server.`, color: 'warning' });
+                        setTimeout(() => setNotifications({ msg: null }), 5000);
+                        handleAddContact((prevState) => prevState.filter(c => c.id !== oldContact.id));
+
+                    });
             }
             return;
         }
         // save new contact locally to state of app
 
         const contactObj = { id: getId(), ...contact };
-        handleAddContact(list => [...list, contactObj]);
 
         // save new contact to the database
         contactsService
             .create(contactObj)
             .then((data) => {
                 console.log({ data });
+                handleAddContact(list => [...list, contactObj]);
                 setContact({ name: '', phone: '' });
+                setNotifications({ msg: `Added ${data.name} successfully.`, color: 'success' });
+                setTimeout(() => setNotifications({ msg: null }), 5000)
             })
             .catch((error) => console.log({ error }));
     }

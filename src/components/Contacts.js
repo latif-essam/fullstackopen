@@ -1,7 +1,7 @@
 import React from 'react';
 import Contatc from './Contact';
 
-const Contacts = ({ contacts, handleUpdateContacts }) => {
+const Contacts = ({ contacts, handleUpdateContacts, setNotifications }) => {
 
     return (
         <div>
@@ -9,7 +9,7 @@ const Contacts = ({ contacts, handleUpdateContacts }) => {
             <div style={{ height: '60vh', width: '100%', overflow: 'scroll' }}>
                 <ul style={{ listStyle: 'none', boxShadow: '0px 0px 1px dodgerblue', padding: 5 }}>
                     {contacts.map(person =>
-                        <Contatc handleUpdateContacts={handleUpdateContacts} key={person.id} contatc={person} />
+                        <Contatc setNotifications={setNotifications} handleUpdateContacts={handleUpdateContacts} key={person.id} contatc={person} />
                     )}
                 </ul>
             </div>
