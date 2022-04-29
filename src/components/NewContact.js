@@ -22,7 +22,10 @@ const NewContact = ({ handleAddContact, list }) => {
                     .update(oldContact.id, { ...oldContact, phone: contact.phone })
                     .then((updatedContact) => {
                         console.log('success updating', updatedContact)
-                        handleAddContact((prevState) => [...prevState.filter((c) => c.id !== oldContact.id), updatedContact])
+                        handleAddContact((prevState) => prevState.map((c) => c.id === oldContact.id ? updatedContact : c)
+                        );
+                        setContact({ name: '', phone: '' });
+
                     })
                     .catch((error) => console.log({ error }));
             }
