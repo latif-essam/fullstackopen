@@ -2,7 +2,7 @@ import React from 'react';
 import noteServices from '../services/notes';
 import ListItem from './ListItem';
 
-const List = ({ list, handleUpdateItem }) => {
+const List = ({ list, handleUpdateItem, handleErrorMsg }) => {
 
     const toggleImportanceOf = (item) => {
         noteServices
@@ -10,7 +10,11 @@ const List = ({ list, handleUpdateItem }) => {
             .then(({ data }) => {
                 handleUpdateItem(list.map(n => n.id !== item.id ? n : data))
             })
-            .catch(error => console.log({ error }));
+            .catch(error => {
+                handleErrorMsg(`Note ${item.content} was already removed from server`);
+                setTimeout(() => handleErrorMsg(null), 5000);
+                handleUpdateItem(list.filter((n) => n.id !== item.id));
+            });
     }
     return (
         <div>

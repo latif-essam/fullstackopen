@@ -5,7 +5,7 @@ const ListItem = ({ item, toggleItem }) => {
     const label = item.important ? 'make not important' : 'make important';
 
     return (
-        <li>
+        <li className='note'>
             <p>
                 {item?.content}
             </p>
